@@ -15,7 +15,6 @@ InputDecorationTheme lightInpTheme = InputDecorationTheme(
       borderSide: BorderSide(color: Colors.red, width: 3),
     ));
 
-
 InputDecorationTheme darkInpTheme = InputDecorationTheme(
     fillColor: Colors.white,
     filled: true,
