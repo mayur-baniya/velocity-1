@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
+import 'custom_themes/XElevatedButtonTheme.dart';
+import 'custom_themes/XTextFieldTheme.dart';
 
-class ThemeClass{
-
-
-
-// :::::::::::::::::::::::::: light theme ::::::::::::::::::::::::::::: //
-static ThemeData lightTheme = ThemeData(
-
+ThemeData lightTheme = ThemeData(
+  colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+  useMaterial3: true,
+  inputDecorationTheme: lightInpTheme,
+  elevatedButtonTheme: lightBtnTheme,
 );
 
-
-//::::::::::::::::::::::::::::: dark theme:::::::::::::::::::::::::::::::::::// 
-static ThemeData darkTheme = ThemeData(
-
-
+ThemeData darkTheme = ThemeData(
+  colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+  useMaterial3: true,
+  inputDecorationTheme: darkInpTheme,
+  elevatedButtonTheme: darkBtnTheme,
 );
-
-
-}
