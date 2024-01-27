@@ -17,11 +17,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeClass.lightTheme,
       darkTheme: ThemeClass.darkTheme,
       themeMode: ThemeMode.system,
-      home: Scaffold(
-          body: Center(
-            child: Text('hello world'),
-          ),
-      )
-    );
+      home:const  Scaffold(
+        body: Center(
+          child: Text('hello'),
+        ),
+      ),
+      
+      );
   }
 }
