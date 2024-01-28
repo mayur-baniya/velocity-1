@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 ElevatedButtonThemeData lightBtnTheme = ElevatedButtonThemeData(
   style: ElevatedButton.styleFrom(
-    textStyle: TextStyle(
+  textStyle: TextStyle(
         fontFamily: GoogleFonts.poppins().fontFamily,
         fontSize: 17,
         fontWeight: FontWeight.bold),
@@ -15,7 +15,6 @@ ElevatedButtonThemeData lightBtnTheme = ElevatedButtonThemeData(
     minimumSize: Size(double.infinity, 50),
   ),
 );
-
 ElevatedButtonThemeData darkBtnTheme = ElevatedButtonThemeData(
   style: ElevatedButton.styleFrom(
     textStyle: TextStyle(

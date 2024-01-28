@@ -6,7 +6,6 @@ import 'custom_themes/XElevatedButtonTheme.dart';
 import 'custom_themes/XTextFieldTheme.dart';
 
 ThemeData lightTheme = ThemeData(
-
   fontFamily: GoogleFonts.poppins().fontFamily,
   colorScheme: ColorScheme.fromSeed(seedColor: primaryColor),
   primarySwatch: Colors.blue,
