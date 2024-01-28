@@ -41,7 +41,7 @@ InputDecorationTheme darkInpTheme = InputDecorationTheme(
         borderRadius: BorderRadius.circular(11),
         borderSide: BorderSide(color: Colors.transparent)),
 
-    fillColor: const Color.fromARGB(255, 34, 33, 33),
+    fillColor:  Color.fromARGB(255, 34, 33, 33),
     filled: true,
-   
    );
+  
