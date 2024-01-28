@@ -20,11 +20,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     print("envtest: ${dotenv.env['appname']}");
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Velocity',
-        theme: lightTheme,
-        darkTheme: darkTheme,
-        themeMode: ThemeMode.light,
-        home: const LoginScreen());
+      debugShowCheckedModeBanner: false,
+      title: 'Velocity',
+      theme: lightTheme,
+      darkTheme: darkTheme,
+      // themeMode: ThemeMode.system,
+      home: LoginScreen(),
+    );
   }
 }
