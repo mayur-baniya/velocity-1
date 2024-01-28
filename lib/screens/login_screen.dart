@@ -13,27 +13,11 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(),
-      appBar: AppBar(
-        centerTitle: true,
-        title: 'Velocity'.text.make(),
-      ),
-      body: VxBox(
-          child: Column(
+      appBar: AppBar(),
+      body: Column(
         children: [
-          TextFormField(
-            decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.mail_outline), hintText: "Enter Email"),
-          ).marginSymmetric(vertical: 10),
-          TextFormField(
-            obscureText: true,
-            decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.lock_outline),
-                hintText: "Enter password"),
-          ).marginSymmetric(vertical: 10),
-          ElevatedButton(onPressed: () {}, child: "Login".text.make())
+          Text('hello')
         ],
-      )).make().p16().centered().expand(),
-    );
+      ));
   }
 }

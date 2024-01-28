@@ -10,13 +10,16 @@ ThemeData lightTheme = ThemeData(
   colorScheme: ColorScheme.fromSeed(seedColor: primaryColor),
   primarySwatch: Colors.blue,
   useMaterial3: true,
+  scaffoldBackgroundColor: Colors.white,
+  primaryColor: ThemeData.dark().scaffoldBackgroundColor,
   inputDecorationTheme: lightInpTheme,
   elevatedButtonTheme: lightBtnTheme,
 );
 
 ThemeData darkTheme = ThemeData(
+  scaffoldBackgroundColor: darkBackgroundColor,
+  primaryColor: ThemeData.dark().scaffoldBackgroundColor,
   fontFamily: GoogleFonts.poppins().fontFamily,
-  colorScheme: ColorScheme.fromSeed(seedColor: primaryColor),
   useMaterial3: true,
   inputDecorationTheme: darkInpTheme,
   elevatedButtonTheme: darkBtnTheme,
