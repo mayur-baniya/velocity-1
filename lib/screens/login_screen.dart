@@ -12,13 +12,17 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: VxBox(
-          child: Column(
+      
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          TextFormField(),
+          TextField(
+            decoration: InputDecoration(
+              prefixIcon: Icon(Icons.email)
+            ),
+          )
         ],
-      )).make().p16().centered().expand(),
+      ),
     );
   }
 }

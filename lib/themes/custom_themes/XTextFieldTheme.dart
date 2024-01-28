@@ -1,31 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:velocity/themes/colors.dart';
+
+
+
 
 InputDecorationTheme lightInpTheme = InputDecorationTheme(
-    fillColor: Colors.white,
-    filled: true,
-    focusedBorder: UnderlineInputBorder(
-      borderRadius: BorderRadius.circular(11),
-      borderSide: BorderSide(color: Colors.blue, width: 3),
-    ),
-    enabledBorder: OutlineInputBorder(
+
+  
+    prefixIconColor: primaryColor,
+    suffixIconColor:primaryColor,
+
+  enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(11), borderSide: BorderSide.none),
-    contentPadding: EdgeInsets.all(18),
+    focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(11), borderSide: BorderSide.none),
     errorBorder: UnderlineInputBorder(
-      borderRadius: BorderRadius.circular(11),
-      borderSide: BorderSide(color: Colors.red, width: 3),
-    ));
+        borderRadius: BorderRadius.circular(11),
+        borderSide: BorderSide(color: Colors.transparent)),
+
+    fillColor: Colors.white,
+    filled: true, 
+  );
+
+
+ 
+
+
 
 InputDecorationTheme darkInpTheme = InputDecorationTheme(
+   
+   
+    prefixIconColor: primaryColor,
+    suffixIconColor:primaryColor,
+
+  enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(11), borderSide: BorderSide.none),
+    focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(11), borderSide: BorderSide.none),
+    errorBorder: UnderlineInputBorder(
+        borderRadius: BorderRadius.circular(11),
+        borderSide: BorderSide(color: Colors.transparent)),
+
     fillColor: const Color.fromARGB(255, 34, 33, 33),
     filled: true,
-    focusedBorder: UnderlineInputBorder(
-      borderRadius: BorderRadius.circular(11),
-      borderSide: BorderSide(color: Colors.blue, width: 3),
-    ),
-    enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(11), borderSide: BorderSide.none),
-    contentPadding: EdgeInsets.all(18),
-    errorBorder: UnderlineInputBorder(
-      borderRadius: BorderRadius.circular(11),
-      borderSide: BorderSide(color: Colors.red, width: 3),
-    ));
+   
+   );

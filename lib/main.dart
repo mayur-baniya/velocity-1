@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:velocity/screens/login_screen.dart';
 import 'package:velocity/themes/themes.dart';
 
 void main() {
@@ -17,23 +18,9 @@ class MyApp extends StatelessWidget {
         title: 'Velocity',
         theme: lightTheme,
         darkTheme: darkTheme,
-        themeMode: ThemeMode.dark,
-        home: Scaffold(
-          body: const Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-
-              Center(child: Text('Example Text')),
-
-              Center(
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: "Enter email and pass", 
-                  ),
-                ),
-              )
-            ],
-          )
-        ));
+        themeMode: ThemeMode.light,
+        home: LoginScreen(),
+        
+        );
   }
 }
