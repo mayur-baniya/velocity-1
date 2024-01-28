@@ -18,7 +18,7 @@ InputDecorationTheme lightInpTheme = InputDecorationTheme(
     ));
 
 InputDecorationTheme darkInpTheme = InputDecorationTheme(
-    fillColor: Colors.white,
+    fillColor: const Color.fromARGB(255, 34, 33, 33),
     filled: true,
     prefixIconColor: primaryColor,
     focusedBorder: UnderlineInputBorder(
