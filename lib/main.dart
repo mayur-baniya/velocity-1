@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:velocity/screens/login_screen.dart';
+import 'package:velocity/screens/signup_screen.dart';
 import 'package:velocity/themes/themes.dart';
 
 main() async {
@@ -19,15 +20,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print("envtest: ${dotenv.env['appname']}");
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Velocity',
-        theme: lightTheme,
-        darkTheme: darkTheme,
-        // themeMode: ThemeMode.system,
-        home: LoginScreen(),
-        
-        );
-       
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Velocity',
+      theme: lightTheme,
+      darkTheme: darkTheme,
+      themeMode: ThemeMode.dark,
+      home: SignUpScreen(),
+    );
   }
 }

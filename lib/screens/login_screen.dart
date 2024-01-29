@@ -31,7 +31,10 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: false,
-        drawer: Drawer(),
+        drawer: IconButton(
+          onPressed: () {},
+          icon: const Icon(Icons.menu),
+        ),
         appBar: AppBar(
           centerTitle: true,
           title: "Velocity".text.xl2.bold.make(),
@@ -46,26 +49,28 @@ class _LoginScreenState extends State<LoginScreen> {
                 })
           ],
         ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            VxBox(
-                child: SingleChildScrollView(
-              child: Column(children: [
-                TextFormField(
-                  decoration: InputDecoration(
-                      hintText: "Enter Email",
-                      prefixIcon: Icon(Icons.mail_outline_rounded)),
-                ).marginSymmetric(vertical: 10),
-                TextFormField(
-                  decoration: InputDecoration(
-                      hintText: "Enter password",
-                      prefixIcon: Icon(Icons.lock_outline)),
-                ).marginSymmetric(vertical: 10),
-                ElevatedButton(onPressed: () {}, child: "Submit".text.make())
-              ]),
-            )).make().marginSymmetric(horizontal: 20)
-          ],
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              VxBox(
+                  child: SingleChildScrollView(
+                child: Column(children: [
+                  TextFormField(
+                    decoration: const InputDecoration(
+                        hintText: "Enter Email",
+                        prefixIcon: Icon(Icons.mail_outline_rounded)),
+                  ).marginSymmetric(vertical: 10),
+                  TextFormField(
+                    decoration: const InputDecoration(
+                        hintText: "Enter password",
+                        prefixIcon: Icon(Icons.lock_outline)),
+                  ).marginSymmetric(vertical: 10),
+                  ElevatedButton(onPressed: () {}, child: "Submit".text.make())
+                ]),
+              )).make().marginSymmetric(horizontal: 20)
+            ],
+          ),
         ));
   }
 }

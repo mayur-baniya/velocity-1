@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:velocity/themes/colors.dart';
 
 InputDecorationTheme lightInpTheme = InputDecorationTheme(
+  
   contentPadding: EdgeInsets.all(18),
   prefixIconColor: primaryColor,
   suffixIconColor: primaryColor,
   hintStyle: TextStyle(
     color: Colors.grey,
   ),
+  
   enabledBorder: UnderlineInputBorder(
       borderRadius: BorderRadius.circular(11),
       borderSide: BorderSide(color: Colors.transparent)),
@@ -28,9 +30,10 @@ InputDecorationTheme lightInpTheme = InputDecorationTheme(
 InputDecorationTheme darkInpTheme = InputDecorationTheme(
   contentPadding: EdgeInsets.all(18),
   hintStyle: TextStyle(
-    color: Colors.white60,
+    color: Colors.white10,
   ),
   prefixIconColor: primaryColor,
+  
   suffixIconColor: primaryColor,
   enabledBorder: UnderlineInputBorder(
       borderRadius: BorderRadius.circular(11),
