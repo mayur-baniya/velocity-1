@@ -30,7 +30,7 @@ InputDecorationTheme lightInpTheme = InputDecorationTheme(
 InputDecorationTheme darkInpTheme = InputDecorationTheme(
   contentPadding: EdgeInsets.all(18),
   hintStyle: TextStyle(
-    color: Colors.white10,
+    color: Colors.white60,
   ),
   prefixIconColor: primaryColor,
   
