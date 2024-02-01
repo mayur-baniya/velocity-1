@@ -27,10 +27,7 @@ class AppHeaderLogo extends StatelessWidget {
             TextSpan(
                 text: 'elocity',
                 style: TextStyle(
-                    color: (MediaQuery.of(context).platformBrightness ==
-                            Brightness.light
-                        ? Colors.black
-                        : Colors.white),
+                    color: secondaryColor(context),
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
                     fontFamily: GoogleFonts.aclonica().fontFamily))

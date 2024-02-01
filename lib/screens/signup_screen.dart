@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:velocity/common/widgets/app_header_logo.dart';
@@ -14,6 +16,7 @@ class SignUpScreen extends StatefulWidget {
 class SignUpScreenState extends State<SignUpScreen> {
   final city = ['Nagpur', 'Bhandara', 'Wardha'];
   var selectedCity;
+  bool isObscure = true;
 
   @override
   Widget build(BuildContext context) {
@@ -27,34 +30,29 @@ class SignUpScreenState extends State<SignUpScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              VxBox(
-                child: AppHeaderLogo(
-                  subtitleText: "Let's create your Account",
-                )
-              )
-                  .width(Get.width * 1)
-                  .height(Get.height * 0.15)
-                  .make(),
+              AppHeaderLogo(
+                subtitleText: "Let's create your Account",
+              ).h16(context),
+                  
              
               TextFormField(
                 decoration: InputDecoration(
                     prefixIcon: Icon(Icons.person), hintText: "eg: John Doe"),
-              ).marginSymmetric(horizontal: 15).paddingOnly(top: 10),
+              ).marginSymmetric(vertical: 5),
               TextFormField(
                 decoration: InputDecoration(
                     prefixIcon: Icon(Icons.email), hintText: "Email Address"),
-              ).marginSymmetric(horizontal: 15).paddingOnly(top: 10),
+              ).marginSymmetric(vertical: 5),
               TextFormField(
                 decoration: InputDecoration(
                     prefixIcon: Icon(Icons.phone), hintText: "Phone Number"),
-              ).marginSymmetric(horizontal: 15).paddingOnly(top: 10),
+              ).marginSymmetric(vertical: 5),
         
         
               Row(
                 children: [
                   VxBox(
                           child: DropdownButtonFormField(
-                                  icon: Icon(Icons.location_on_rounded),
                                   items: city.map(buildMenuItems).toList(),
                                   onChanged: (value) {
                                     setState(() {
@@ -64,11 +62,9 @@ class SignUpScreenState extends State<SignUpScreen> {
                                   
                                   )
                               .marginOnly(top: 10)
-                              .paddingSymmetric(horizontal: 15)
                               )
-                      .width(Get.width * 0.5)
+                      .width(Get.width * 0.45)
                       .height(Get.height * 0.1)
-                      
                       .make(),
           
                         VxBox(
@@ -80,16 +76,36 @@ class SignUpScreenState extends State<SignUpScreen> {
                                     });
                                   })
                               .marginOnly(top: 10)
-                              .paddingSymmetric(horizontal: 15)
                               )
-                      .width(Get.width * 0.5)
+                      .width(Get.width * 0.44)
                       .height(Get.height * 0.1)
                       .make(),
                 ],
               ),
+
+              TextFormField(
+                decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.lock_rounded), hintText: "Set Password"),
+              ).marginSymmetric(vertical: 5),
+              TextFormField(
+                decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.lock_rounded), hintText: "Confirm Password"),
+              ).marginSymmetric(vertical: 5),
+
+
+
+              VxBox(
+
+                
+
+              ).make()
+
+
+
+
             ],
           ),
-        ),
+        ).marginSymmetric( horizontal: 20),
       ),
     );
   }

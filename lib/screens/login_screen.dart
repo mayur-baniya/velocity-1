@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors 
  
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart'; 
 import 'package:get/get.dart'; 
 import 'package:google_fonts/google_fonts.dart'; 
@@ -36,7 +37,8 @@ class _LoginScreenState extends State<LoginScreen> {
               TextFormField( 
                 decoration: const InputDecoration( 
                     hintText: "Enter Email", 
-                    prefixIcon: Icon(Icons.mail_outline_rounded)), 
+                    prefixIcon: Icon(CupertinoIcons.mail)
+                    ), 
               ).marginSymmetric(vertical: 10), 
               TextFormField( 
                 obscureText: isObscure, 
@@ -45,17 +47,19 @@ class _LoginScreenState extends State<LoginScreen> {
                     suffixIcon: IconButton( 
                         icon: Icon( 
                           isObscure 
-                              ? Icons.visibility_outlined 
-                              : Icons.visibility_off_outlined, 
+                              ? CupertinoIcons.eye
+                              : CupertinoIcons.eye_slash, 
                         ), 
                         onPressed: () { 
                           setState(() { 
                             isObscure = !isObscure; 
                           }); 
                         }), 
-                    prefixIcon: Icon(Icons.lock_outline)), 
+                    prefixIcon: Icon(CupertinoIcons.lock)), 
               ).marginSymmetric(vertical: 10), 
-              ElevatedButton(onPressed: () {}, child: "Login".text.make()) 
+              ElevatedButton(onPressed: () {
+                secondaryColor(context);
+              }, child: "Login".text.make()) 
                   .marginSymmetric(vertical: 15), 
               TextButton( 
                       onPressed: () {}, 
