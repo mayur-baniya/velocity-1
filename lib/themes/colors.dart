@@ -9,6 +9,14 @@ secondaryColor(BuildContext context) =>
         ? Colors.black
         : Colors.white);
 
+
+helperColor(BuildContext context) =>(
+  (MediaQuery.of(context).platformBrightness == Brightness.light
+      ? Colors.white38 
+      : Color.fromARGB(255, 29, 29, 29)
+  )
+);
+
 //::::::::::::::::::::::::::::::: light color ::::::::::::::::::::::::::::::::::::::::://
 
 Color bgLightColor = const Color(0xFF229ED9);

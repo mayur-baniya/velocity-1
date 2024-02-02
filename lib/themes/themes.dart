@@ -11,8 +11,8 @@ ThemeData lightTheme = ThemeData(
   textTheme: lightTextTheme,
   fontFamily: GoogleFonts.poppins().fontFamily,
   appBarTheme: AppBarTheme(
-    backgroundColor: bgLightColor,
-    foregroundColor: scaffoldLightColor,
+    backgroundColor: scaffoldLightColor,
+    foregroundColor: bgLightColor,
   ),
   colorScheme: ColorScheme.fromSeed(seedColor: primaryColor),
   primarySwatch: Colors.blue,
@@ -30,10 +30,11 @@ ThemeData darkTheme = ThemeData(
       backgroundColor: bgDarkColor,
       foregroundColor: scaffoldLightColor,
     ),
+   
     fontFamily: GoogleFonts.poppins().fontFamily,
     colorScheme: ColorScheme.fromSeed(seedColor: primaryColor),
     primarySwatch: Colors.blue,
-    scaffoldBackgroundColor: scaffoldDarkColor,
+    scaffoldBackgroundColor: bgDarkColor,
     primaryColor: ThemeData.dark().scaffoldBackgroundColor,
     inputDecorationTheme: darkInpTheme,
     elevatedButtonTheme: darkBtnTheme,

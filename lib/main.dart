@@ -18,10 +18,11 @@ main() async {
 void setStatusBarColor(BuildContext context) {
   Brightness brightness = MediaQuery.of(context).platformBrightness;
   Color statusBarColor =
-      brightness == Brightness.dark ? Colors.black : Colors.blue;
+      brightness == Brightness.dark ? Colors.black : scaffoldLightColor;
 
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: statusBarColor,
+    statusBarIconBrightness: brightness== Brightness.dark ? Brightness.light : Brightness.dark
   ));
 }
 

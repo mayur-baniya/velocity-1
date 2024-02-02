@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:velocity/common/utilities/common_wave_indicator.dart';
 import 'package:velocity/common/widgets/app_header_logo.dart';
 import 'package:velocity/common/widgets/bottom_sheet.dart';
+import 'package:velocity/screens/mainpages/home_screen.dart';
 import 'package:velocity/screens/signup_screen.dart';
 import 'package:velocity/themes/colors.dart';
 import 'package:velocity/themes/icons.dart';
@@ -28,7 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() {
       isLoading = true;
     });
-    await Future.delayed(Duration(milliseconds: 4000));
+    await Future.delayed(Duration(milliseconds: 2000));
     setState(() {
       isLoading = false;
     });
@@ -98,9 +99,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     ? commonIndicator()
                     : ElevatedButton(
                             onPressed: () {
-                              if(_formKey.currentState!.validate()){
-                              setLoadin();
-
+                              if (_formKey.currentState!.validate()) {
+                                setLoadin();
+                                Get.to(() => HomeScreen(),
+                                    transition: Transition.cupertino,
+                                    duration: Duration(milliseconds: 500));
                               }
                             },
                             child: "Login".text.make())
@@ -111,7 +114,51 @@ class _LoginScreenState extends State<LoginScreen> {
                               context,
                               "Reset Password!",
                               "How would you like to reset?",
-                              VxBox()
+
+                              // temporary data, will replace it later 
+                              VxBox(
+                                      child: Column(
+                                children: [
+                                  VxBox(
+                                          child: ListTile(
+                                    leading: Icon(
+                                      Icons.email_outlined,
+                                      color: primaryColor,
+                                    ),
+                                    title: "Via Email Verification"
+                                        .text
+                                        .color(secondaryColor(context))
+                                        .make(),
+                                    trailing: Icon(Icons.arrow_right, color: primaryColor,),
+                                  ))
+                                      .withDecoration(BoxDecoration(
+                                          color: helperColor(context),
+                                          borderRadius:
+                                              BorderRadius.circular(11)))
+                                      .size(Get.width * 0.9, Get.height * 0.07)
+                                      .make()
+                                      .marginOnly(top: 20),
+                                  VxBox(
+                                          child: ListTile(
+                                    leading: Icon(
+                                      Icons.phone_callback_outlined,
+                                      color: primaryColor,
+                                    ),
+                                    title: "Via Phone Verification"
+                                        .text
+                                        .color(secondaryColor(context))
+                                        .make(),
+                                    trailing: Icon(Icons.arrow_right, color: primaryColor,),
+                                  ))
+                                      .withDecoration(BoxDecoration(
+                                          color: helperColor(context),
+                                          borderRadius:
+                                              BorderRadius.circular(11)))
+                                      .size(Get.width * 0.9, Get.height * 0.07)
+                                      .make()
+                                      .marginOnly(top: 20),
+                                ],
+                              ))
                                   .size(Get.width * 0.9, Get.height * 0.3)
                                   .make());
                         },
