@@ -22,6 +22,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   bool isLoading = false;
   bool isObscure = true;
+  final _formKey = GlobalKey<FormState>();
 
   void setLoadin() async {
     setState(() {
@@ -41,135 +42,160 @@ class _LoginScreenState extends State<LoginScreen> {
             (MediaQuery.of(context).platformBrightness == Brightness.light
                 ? scaffoldLightColor
                 : Colors.black),
-        body: SafeArea(
-          child: VxBox(
-              child: Column(children: [
-            VxBox(
+        body: Form(
+          key: _formKey,
+          child: SafeArea(
+            child: VxBox(
                 child: Column(children: [
-              AppHeaderLogo(
-                subtitleText: "Welcome back you've been missed",
-              ).h24(context),
-              TextFormField(
-                decoration: const InputDecoration(
+              VxBox(
+                  child: Column(children: [
+                AppHeaderLogo(
+                  subtitleText: "Welcome back you've been missed",
+                ).h24(context),
+                TextFormField(
+                  decoration: const InputDecoration(
                     hintText: "Enter Email",
-                    prefixIcon:  Icon(Icons.email_outlined),
-                    ),
-              ).marginSymmetric(vertical: 10),
-              TextFormField(
-                obscureText: isObscure,
-                decoration: InputDecoration(
-                    hintText: "Enter password",
-                    suffixIcon: IconButton(
-                        icon: Icon(
-                          isObscure
-                              ? Icons.visibility_outlined
-                              : Icons.visibility_off_outlined,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            isObscure = !isObscure;
-                          });
-                        }),
-                    prefixIcon: Icon(Icons.lock_outline)),
-              ).marginSymmetric(vertical: 10),
-              isLoading
-                  ? commonIndicator()
-                  : ElevatedButton(
+                    prefixIcon: Icon(Icons.email_outlined),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Please enter your Email address";
+                    } else if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w]{2,5}')
+                        .hasMatch(value)) {
+                      return 'Please Enter a valid email';
+                    }
+                  },
+                ).marginSymmetric(vertical: 10),
+                TextFormField(
+                  obscureText: isObscure,
+                  decoration: InputDecoration(
+                      hintText: "Enter password",
+                      suffixIcon: IconButton(
+                          icon: Icon(
+                            isObscure
+                                ? Icons.visibility_outlined
+                                : Icons.visibility_off_outlined,
+                          ),
                           onPressed: () {
-                            setLoadin();
-                          },
-                          child: "Login".text.make())
-                      .marginSymmetric(vertical: 15),
-              TextButton(
-                      onPressed: () {
-                        commonBottomSheet(
-                            context,
-                            "Reset Password!",
-                            "How would you like to reset?",
-                            VxBox()
-                                .size(Get.width * 0.9, Get.height * 0.3)
-                                .make());
-                      },
-                      child: 'Forgot password?'.text.bold.make())
-                  .marginSymmetric(vertical: 10),
-            ])).make(),
-            VxBox(
-                child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                "------ Or Continue With -----"
-                    .text
-                    .makeCentered()
+                            setState(() {
+                              isObscure = !isObscure;
+                            });
+                          }),
+                      prefixIcon: Icon(Icons.lock_outline)),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Password can't be empty";
+                    } else if (value.length < 6) {
+                      return "Password should be atleast 6 characters long";
+                    } else if (value.length > 50) {
+                      return "what are you trying to do?";
+                    } else if (!RegExp(r'^\S*$').hasMatch(value)) {
+                      return "Password should not contain Spaces";
+                    }
+                  },
+                ).marginSymmetric(vertical: 10),
+                isLoading
+                    ? commonIndicator()
+                    : ElevatedButton(
+                            onPressed: () {
+                              if(_formKey.currentState!.validate()){
+                              setLoadin();
+
+                              }
+                            },
+                            child: "Login".text.make())
+                        .marginSymmetric(vertical: 15),
+                TextButton(
+                        onPressed: () {
+                          commonBottomSheet(
+                              context,
+                              "Reset Password!",
+                              "How would you like to reset?",
+                              VxBox()
+                                  .size(Get.width * 0.9, Get.height * 0.3)
+                                  .make());
+                        },
+                        child: 'Forgot password?'.text.bold.make())
                     .marginSymmetric(vertical: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    TextButton(
-                        style: ButtonStyle(
-                          fixedSize: MaterialStatePropertyAll(
-                              Size(MediaQuery.of(context).size.width / 3, 30)),
-                          backgroundColor:
-                              MaterialStateProperty.all(Colors.blue),
-                          foregroundColor:
-                              MaterialStateProperty.all(Colors.white),
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
+              ])).make(),
+              VxBox(
+                  child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  "------ Or Continue With -----"
+                      .text
+                      .makeCentered()
+                      .marginSymmetric(vertical: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      TextButton(
+                          style: ButtonStyle(
+                            fixedSize: MaterialStatePropertyAll(Size(
+                                MediaQuery.of(context).size.width / 3, 30)),
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.blue),
+                            foregroundColor:
+                                MaterialStateProperty.all(Colors.white),
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
                             ),
                           ),
-                        ),
-                        onPressed: () {},
-                        child: 'Facebook'.text.white.lg.bold.make()),
-                    TextButton(
-                        style: ButtonStyle(
-                          fixedSize: MaterialStatePropertyAll(
-                              Size(MediaQuery.of(context).size.width / 3, 30)),
-                          // padding:MaterialStateProperty.all(
-                          //     EdgeInsets.symmetric(
-                          //         vertical: 10, horizontal: 25)),
-                          backgroundColor:
-                              MaterialStateProperty.all(Colors.redAccent),
-                          foregroundColor:
-                              MaterialStateProperty.all(Colors.white),
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
+                          onPressed: () {},
+                          child: 'Facebook'.text.white.lg.bold.make()),
+                      TextButton(
+                          style: ButtonStyle(
+                            fixedSize: MaterialStatePropertyAll(Size(
+                                MediaQuery.of(context).size.width / 3, 30)),
+                            // padding:MaterialStateProperty.all(
+                            //     EdgeInsets.symmetric(
+                            //         vertical: 10, horizontal: 25)),
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.redAccent),
+                            foregroundColor:
+                                MaterialStateProperty.all(Colors.white),
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
                             ),
                           ),
-                        ),
-                        onPressed: () {},
-                        child: 'Google'.text.lg.bold.make()),
-                  ],
-                ).marginSymmetric(vertical: 15),
-                InkWell(
-                    splashColor: Colors.transparent,
-                    onTap: () {
-                      Get.to(() => SignUpScreen(),
-                          transition: Transition.cupertino,
-                          duration: Duration(milliseconds: 500));
-                    },
-                    child: RichText(
-                        text: TextSpan(children: <TextSpan>[
-                      TextSpan(
-                          text: 'Don\'t have an account? ',
-                          style: TextStyle(
-                              fontSize: 15,
-                              color: secondaryColor(context),
-                              fontWeight: FontWeight.bold,
-                              fontFamily: GoogleFonts.poppins().fontFamily)),
-                      TextSpan(
-                          text: 'Register now!',
-                          style: TextStyle(
-                              color: primaryColor,
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: GoogleFonts.poppins().fontFamily))
-                    ]))).marginSymmetric(vertical: 15),
-              ],
-            )).make().expand(),
-          ])).make().marginSymmetric(horizontal: 20).h(context.screenHeight),
+                          onPressed: () {},
+                          child: 'Google'.text.lg.bold.make()),
+                    ],
+                  ).marginSymmetric(vertical: 15),
+                  InkWell(
+                      splashColor: Colors.transparent,
+                      onTap: () {
+                        Get.to(() => SignUpScreen(),
+                            transition: Transition.cupertino,
+                            duration: Duration(milliseconds: 500));
+                      },
+                      child: RichText(
+                          text: TextSpan(children: <TextSpan>[
+                        TextSpan(
+                            text: 'Don\'t have an account? ',
+                            style: TextStyle(
+                                fontSize: 15,
+                                color: secondaryColor(context),
+                                fontWeight: FontWeight.bold,
+                                fontFamily: GoogleFonts.poppins().fontFamily)),
+                        TextSpan(
+                            text: 'Register now!',
+                            style: TextStyle(
+                                color: primaryColor,
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: GoogleFonts.poppins().fontFamily))
+                      ]))).marginSymmetric(vertical: 15),
+                ],
+              )).make().expand(),
+            ])).make().marginSymmetric(horizontal: 20).h(context.screenHeight),
+          ),
         ));
   }
 }
