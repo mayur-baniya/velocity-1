@@ -4,18 +4,18 @@ import 'package:velocity/themes/colors.dart';
 
 TextTheme lightTextTheme = TextTheme(
   bodyMedium: TextStyle(
-      color: primaryColor, fontFamily: GoogleFonts.poppins().fontFamily),
+      color: Colors.black, fontFamily: GoogleFonts.poppins().fontFamily),
   bodyLarge: TextStyle(
-      color: primaryColor, fontFamily: GoogleFonts.poppins().fontFamily),
+      color: Colors.black, fontFamily: GoogleFonts.poppins().fontFamily),
   bodySmall: TextStyle(
-      color: primaryColor, fontFamily: GoogleFonts.poppins().fontFamily),
+      color: Colors.black, fontFamily: GoogleFonts.poppins().fontFamily),
 );
 
 TextTheme darkTextTheme = TextTheme(
   bodyMedium: TextStyle(
-      color: primaryColor, fontFamily: GoogleFonts.poppins().fontFamily),
+      color: Colors.white, fontFamily: GoogleFonts.poppins().fontFamily),
   bodyLarge: TextStyle(
-      color: primaryColor, fontFamily: GoogleFonts.poppins().fontFamily),
+      color: Colors.white, fontFamily: GoogleFonts.poppins().fontFamily),
   bodySmall: TextStyle(
-      color: primaryColor, fontFamily: GoogleFonts.poppins().fontFamily),
+      color: Colors.white, fontFamily: GoogleFonts.poppins().fontFamily),
 );

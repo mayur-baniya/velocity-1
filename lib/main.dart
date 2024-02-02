@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:velocity/screens/login_screen.dart';
 import 'package:velocity/screens/signup_screen.dart';
+import 'package:velocity/screens/test.dart';
 import 'package:velocity/themes/colors.dart';
 import 'package:velocity/themes/themes.dart';
 
@@ -36,8 +37,8 @@ class MyApp extends StatelessWidget {
       title: 'Velocity',
       theme: lightTheme,
       darkTheme: darkTheme,
-      // themeMode: ThemeMode.system,
-      home: LoginScreen(),
+      themeMode: ThemeMode.system,
+      home: LoginScreen(), //LoginScreen()SignUpScreen
     );
   }
 }

@@ -25,8 +25,8 @@ ElevatedButtonThemeData darkBtnTheme = ElevatedButtonThemeData(
         fontFamily: GoogleFonts.poppins().fontFamily,
         fontSize: 18,
         fontWeight: FontWeight.bold),
-    backgroundColor: bgDarkColor,
-    foregroundColor: primaryColor,
+    backgroundColor: primaryColor,
+    foregroundColor: Colors.white,
     shape: RoundedRectangleBorder(
       side: BorderSide(width: 1, color: primaryColor),
       borderRadius: BorderRadius.circular(8),

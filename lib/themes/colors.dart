@@ -2,14 +2,14 @@
 
 import 'package:flutter/material.dart';
 
-secondaryColor(BuildContext context) =>(
-   MediaQuery.of(context).platformBrightness == Brightness.light 
-      ? Colors.black 
-      : Colors.white
-);
-
-
 Color primaryColor = Color(0xFF229ED9);
+
+secondaryColor(BuildContext context) =>
+    (MediaQuery.of(context).platformBrightness == Brightness.light
+        ? Colors.black
+        : Colors.white);
+
+//::::::::::::::::::::::::::::::: light color ::::::::::::::::::::::::::::::::::::::::://
 
 Color bgLightColor = const Color(0xFF229ED9);
 Color scaffoldLightColor = Color.fromARGB(255, 242, 245, 250);
