@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:velocity/screens/mainpages/NavBar.dart';
@@ -30,24 +32,17 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       drawer: NavBar(),
-      body: GestureDetector(
-        onHorizontalDragEnd: (DragEndDetails details) {
-         if(details.primaryVelocity! > 10){
-          Get.to(()=> SignUpScreen());
-         } 
-        },
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            VxBox()
-                .withDecoration(BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage('assets/images/defaultpfp.png'))))
-                .size(200, 200)
-                .color(Colors.green)
-                .makeCentered()
-          ],
-        ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          VxBox()
+              .withDecoration(BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('assets/images/defaultpfp.png'))))
+              .size(200, 200)
+              .color(Colors.green)
+              .makeCentered()
+        ],
       ),
     );
   }

@@ -8,6 +8,7 @@
 .buildlog/
 .history
 .svn/
+.env
 # Ignore config directory
 config/
 migrate_working_dir/

@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -19,12 +19,13 @@ class _NavBarState extends State<NavBar> {
         padding: EdgeInsets.zero,
         children: [
           UserAccountsDrawerHeader(
-
             decoration: BoxDecoration(
               border: Border(bottom: BorderSide.none),
-              color: MediaQuery.of(context).platformBrightness == Brightness.dark ? bgDarkColor : scaffoldLightColor,
+              color:
+                  MediaQuery.of(context).platformBrightness == Brightness.dark
+                      ? bgDarkColor
+                      : scaffoldLightColor,
             ),
-
             accountName: "Tashii".text.make(),
             accountEmail: "tashii@mail.com".text.make(),
             currentAccountPicture: CircleAvatar(
@@ -62,9 +63,6 @@ class _NavBarState extends State<NavBar> {
                 "Upcoming Vehicles".text.color(secondaryColor(context)).make(),
             onTap: () {},
           ),
-
-         
-
           ListTile(
             leading: Icon(
               Icons.share_rounded,
@@ -89,7 +87,6 @@ class _NavBarState extends State<NavBar> {
             title: "Settings".text.color(secondaryColor(context)).make(),
             onTap: () {},
           ),
-       
           ListTile(
             title: "Version: 1.0.0".text.color(secondaryColor(context)).make(),
             onTap: () {}, // Adjust color if needed
