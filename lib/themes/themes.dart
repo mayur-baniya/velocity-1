@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:velocity/themes/colors.dart';
+import 'package:velocity/themes/custom_themes/x_bottom_navigation_bar_theme.dart';
 import 'package:velocity/themes/custom_themes/x_drawer_theme.dart';
 import 'package:velocity/themes/custom_themes/x_dropdownbutton_theme.dart';
 import 'custom_themes/x_elevatedbutton_theme.dart';
@@ -14,6 +15,7 @@ ThemeData lightTheme = ThemeData(
     backgroundColor: scaffoldLightColor,
     foregroundColor: bgLightColor,
   ),
+  bottomNavigationBarTheme: lightBottomNavBarThemeData,
   colorScheme: ColorScheme.fromSeed(seedColor: primaryColor),
   primarySwatch: Colors.blue,
   scaffoldBackgroundColor: scaffoldLightColor,
@@ -30,7 +32,7 @@ ThemeData darkTheme = ThemeData(
       backgroundColor: bgDarkColor,
       foregroundColor: scaffoldLightColor,
     ),
-   
+    bottomNavigationBarTheme: darkBottomNavBarThemeData,
     fontFamily: GoogleFonts.poppins().fontFamily,
     colorScheme: ColorScheme.fromSeed(seedColor: primaryColor),
     primarySwatch: Colors.blue,

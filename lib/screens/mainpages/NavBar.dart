@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:velocity/screens/mainpages/profile.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:velocity/themes/colors.dart';
 
@@ -12,6 +14,16 @@ class NavBar extends StatefulWidget {
 }
 
 class _NavBarState extends State<NavBar> {
+  bool isDark = false;
+
+  changeTheme() {
+      if (isDark) {
+        Get.changeThemeMode(ThemeMode.dark);
+      } else {
+        Get.changeThemeMode(ThemeMode.light);
+      }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -37,6 +49,21 @@ class _NavBarState extends State<NavBar> {
                 ),
               ),
             ),
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.sunny,
+              color: secondaryColor(context),
+            ),
+            title: "Dark mode?".text.color(secondaryColor(context)).make(),
+            trailing: Switch(
+                value: isDark,
+                onChanged: (value) {
+                  setState(() {
+                    isDark = !isDark;
+                    changeTheme();
+                  });
+                }),
           ),
           ListTile(
             leading: Icon(
@@ -85,7 +112,9 @@ class _NavBarState extends State<NavBar> {
               color: secondaryColor(context),
             ),
             title: "Settings".text.color(secondaryColor(context)).make(),
-            onTap: () {},
+            onTap: () {
+             // Get.to(()=> ());
+            },
           ),
           ListTile(
             title: "Version: 1.0.0".text.color(secondaryColor(context)).make(),

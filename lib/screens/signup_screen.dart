@@ -177,7 +177,7 @@ class SignUpScreenState extends State<SignUpScreen> {
                               child: "any data here".text.make()
                             ).alignCenter
                                 .size(Get.width * 0.9, Get.height * 0.5)
-                                .color(Colors.grey)
+                                .color(helperColor(context))
                                 .make()
                           );
                       },

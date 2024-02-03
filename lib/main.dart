@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
       title: 'Velocity',
       theme: lightTheme,
       darkTheme: darkTheme,
-      themeMode: ThemeMode.system,
+      // themeMode: ThemeMode.system,
       home: LoginScreen(), //LoginScreen()SignUpScreen
     );
   }

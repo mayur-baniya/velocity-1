@@ -191,7 +191,9 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.to(()=> HomeScreen());
+                          },
                           child: 'Facebook'.text.white.lg.bold.make()),
                       TextButton(
                           style: ButtonStyle(

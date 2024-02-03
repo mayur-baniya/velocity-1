@@ -16,31 +16,21 @@ class _TestState extends State<Test> {
 
   @override
   Widget build(BuildContext context) {
-    return VxBox(
-        child: Flexible(
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          VxBox(
-              child: DropdownButtonFormField(
-            items: city.map(buildMenuItems).toList(),
-            onChanged: (value) {
-              setState(() {
-                this.selectedCity = value;
-              });
-            },
-          )).blue100.make().marginOnly(right: 5).expand(),
-        ],
-      ),
-    )).make().marginSymmetric(horizontal: 20);
+    return  ListView.builder(
+      itemCount: 20,
+      itemBuilder: (context, index) {
+        
+        return VxBox()
+        .size(Get.width * 0.8, Get.height * 0.5)
+        .withDecoration(
+          BoxDecoration(
+            color: Vx.randomColor,
+            borderRadius: BorderRadius.circular(11)
+          )
+        )
+        .make().paddingAll(10);
+    },);
+
   }
 
-  DropdownMenuItem<String> buildMenuItems(String city) => DropdownMenuItem(
-        value: city,
-        child: Text(
-          city,
-          style: TextStyle(fontWeight: FontWeight.bold, color: primaryColor),
-        ),
-      );
 }
