@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:velocity/screens/mainpages/profile.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:velocity/themes/colors.dart';
 
@@ -17,11 +16,11 @@ class _NavBarState extends State<NavBar> {
   bool isDark = false;
 
   changeTheme() {
-      if (isDark) {
-        Get.changeThemeMode(ThemeMode.dark);
-      } else {
-        Get.changeThemeMode(ThemeMode.light);
-      }
+    if (isDark) {
+      Get.changeThemeMode(ThemeMode.dark);
+    } else {
+      Get.changeThemeMode(ThemeMode.light);
+    }
   }
 
   @override
@@ -113,7 +112,7 @@ class _NavBarState extends State<NavBar> {
             ),
             title: "Settings".text.color(secondaryColor(context)).make(),
             onTap: () {
-             // Get.to(()=> ());
+              // Get.to(()=> ());
             },
           ),
           ListTile(
