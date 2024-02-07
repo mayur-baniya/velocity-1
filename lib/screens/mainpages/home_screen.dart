@@ -7,6 +7,7 @@ import 'package:velocity/screens/mainpages/NavBar.dart';
 import 'package:velocity/screens/mainpages/Search.dart';
 import 'package:velocity/screens/mainpages/profile.dart';
 import 'package:velocity/screens/test.dart';
+import 'package:velocity/statemanager/states_store.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -17,6 +18,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final ThemeController themeController = Get.put(ThemeController());
+
   late PageController _pageController;
   int _currentIndex = 1;
 
@@ -64,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Icon(Icons.favorite_outline).marginOnly(right: 20),
         ],
       ),
-      drawer: NavBar(),
+      drawer: myDrawer(context, themeController),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           boxShadow: [

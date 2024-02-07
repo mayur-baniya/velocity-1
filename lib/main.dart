@@ -32,7 +32,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     setStatusBarColor(context);
-    print("envtest: ${dotenv.env['appname']}");
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Velocity',

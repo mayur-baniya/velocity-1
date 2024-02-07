@@ -6,8 +6,10 @@ import 'package:rolling_bottom_bar/rolling_bottom_bar.dart';
 import 'package:rolling_bottom_bar/rolling_bottom_bar_item.dart';
 import 'package:velocity/screens/mainpages/NavBar.dart';
 import 'package:velocity/screens/mainpages/Search.dart';
+import 'package:velocity/screens/mainpages/favorite.dart';
 import 'package:velocity/screens/mainpages/profile.dart';
 import 'package:velocity/screens/test.dart';
+import 'package:velocity/statemanager/states_store.dart';
 import 'package:velocity/themes/colors.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -19,15 +21,29 @@ class BottomTest extends StatefulWidget {
 }
 
 class _BottomTestState extends State<BottomTest> {
+  final ThemeController themeController = Get.put(ThemeController());
+
   late PageController _pageController;
-  int _currentIndex = 1;
+  int _currentIndex = 0;
 
-  final List<Widget> _pages = <Widget>[
-    SearchScreen(),
-    Test(),
-    ProfileScreen(),
+  final List<Map> screenList = [
+    {'icon': Icons.home_outlined, 'screen': Test(), 'label': 'Home'},
+    {
+      'icon': Icons.search_outlined,
+      'screen': SearchScreen(),
+      'label': 'Search'
+    },
+    {
+      'icon': Icons.favorite_outline,
+      'screen': FavoriteScreen(),
+      'label': 'Favorite'
+    },
+    {
+      'icon': Icons.person_outline,
+      'screen': ProfileScreen(),
+      'label': 'Profile'
+    },
   ];
-
   @override
   void initState() {
     _pageController = PageController(initialPage: _currentIndex);
@@ -40,20 +56,32 @@ class _BottomTestState extends State<BottomTest> {
     super.dispose();
   }
 
+  bool isDark = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: NavBar(),
+      drawer: myDrawer(context, themeController),
       appBar: AppBar(
         centerTitle: true,
-        title: "Velocity".text.make(),
+        title: "Velocity".text.bold.make(),
         actions: [
-          Icon(Icons.favorite_outline).marginOnly(right: 20),
+          IconButton(
+              icon: Icon(
+                  MediaQuery.of(context).platformBrightness == Brightness.dark
+                      ? Icons.nightlight_round
+                      : Icons.wb_sunny),
+              onPressed: () {
+                themeController.toggleTheme();
+                print("modeeee : ${Get.theme.brightness}");
+              })
+          // Icon(Icons.favorite_outline).marginOnly(right: 20),
         ],
       ),
       body: PageView(
         controller: _pageController,
-        children: _pages,
+        children: screenList.map((item) {
+          return (item['screen'] as Widget);
+        }).toList(),
         onPageChanged: (int index) {
           setState(() {
             _currentIndex = index;
@@ -62,27 +90,18 @@ class _BottomTestState extends State<BottomTest> {
       ),
       extendBody: true,
       bottomNavigationBar: RollingBottomBar(
-        color: helperColor(context),
+        color: getColorBasedOnTheme(),
+        itemColor: Vx.gray500,
         controller: _pageController,
         flat: true,
         useActiveColorByDefault: false,
-        items: [
-          RollingBottomBarItem(
-            Icons.search_outlined,
-            label: 'Search',
+        items: screenList.map((item) {
+          return RollingBottomBarItem(
+            item['icon'] as IconData,
+            label: item['label'] as String,
             activeColor: primaryColor,
-          ),
-          RollingBottomBarItem(
-            Icons.home_outlined,
-            label: 'Home',
-            activeColor: primaryColor,
-          ),
-          RollingBottomBarItem(
-            Icons.person,
-            label: 'Person',
-            activeColor: primaryColor,
-          ),
-        ],
+          );
+        }).toList(),
         enableIconRotation: true,
         onTap: (index) {
           setState(() {
