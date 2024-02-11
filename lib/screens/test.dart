@@ -11,26 +11,18 @@ class Test extends StatefulWidget {
 }
 
 class _TestState extends State<Test> {
-  final city = ['Nagpur', 'Bhandara', 'Wardha'];
-  var selectedCity;
-
   @override
   Widget build(BuildContext context) {
-    return  ListView.builder(
+    return ListView.builder(
       itemCount: 20,
       itemBuilder: (context, index) {
-        
         return VxBox()
-        .size(Get.width * 0.8, Get.height * 0.5)
-        .withDecoration(
-          BoxDecoration(
-            color: Vx.randomColor,
-            borderRadius: BorderRadius.circular(11)
-          )
-        )
-        .make().paddingAll(10);
-    },);
-
+            .size(Get.width * 0.8, Get.height * 0.5)
+            .withDecoration(BoxDecoration(
+                color: Vx.randomColor, borderRadius: BorderRadius.circular(11)))
+            .make()
+            .paddingAll(10);
+      },
+    );
   }
-
 }

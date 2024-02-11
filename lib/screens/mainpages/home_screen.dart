@@ -7,6 +7,7 @@ import 'package:velocity/screens/mainpages/NavBar.dart';
 import 'package:velocity/screens/mainpages/Search.dart';
 import 'package:velocity/screens/mainpages/profile.dart';
 import 'package:velocity/screens/test.dart';
+import 'package:velocity/statemanager/states_store.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -17,6 +18,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final ThemeController themeController = Get.put(ThemeController());
+
   late PageController _pageController;
   int _currentIndex = 1;
 
@@ -64,15 +67,16 @@ class _HomeScreenState extends State<HomeScreen> {
           Icon(Icons.favorite_outline).marginOnly(right: 20),
         ],
       ),
-      drawer: NavBar(),
+      drawer: myDrawer(context, themeController),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(.15),
               blurRadius: 30,
-            )
-          ]
+            ),
+          ],
+          color: Colors.transparent,
         ),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(50),
@@ -86,15 +90,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     label: "SEARCH"),
                 BottomNavigationBarItem(
                     icon: Icon(Icons.home_outlined),
-                    activeIcon: Icon(Icons.home,),
+                    activeIcon: Icon(
+                      Icons.home,
+                    ),
                     label: "HOME"),
                 BottomNavigationBarItem(
                     icon: Icon(CupertinoIcons.person_alt_circle),
                     activeIcon: Icon(CupertinoIcons.person_alt_circle_fill),
                     label: "Profile"),
               ]),
-        )
-            .paddingOnly(bottom: 30, top: 5, right: 60, left: 60),
+        ).paddingOnly(bottom: 30, top: 5, right: 60, left: 60),
       ),
       body: PageView(
         controller: _pageController,

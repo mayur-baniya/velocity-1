@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -17,29 +15,46 @@ class SignUpScreen extends StatefulWidget {
   State<SignUpScreen> createState() => SignUpScreenState();
 }
 
-const List<Map> cityListmap = <Map>[
-  {'id': '1', 'name': 'Nagpur'},
-  {'id': '2', 'name': 'Delhi'},
-  {'id': '3', 'name': 'Banglore'},
-  {'id': '4', 'name': 'Kolkata'},
-];
-const List<Map> genderList = <Map>[
-  {'id': '1', 'value': 'Male'},
-  {'id': '2', 'value': 'Female'},
-  {'id': '3', 'value': 'Other'},
-];
-
 class SignUpScreenState extends State<SignUpScreen> {
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
+  final _nameKey = GlobalKey<FormFieldState>();
+  final _emailKey = GlobalKey<FormFieldState>();
+  final _phoneKey = GlobalKey<FormFieldState>();
+  final _passwordKey = GlobalKey<FormFieldState>();
+  final _confirmPassKey = GlobalKey<FormFieldState>();
 
   final _formKey = GlobalKey<FormState>();
-  String city = '';
-  String gender = '';
   bool isObscure = true;
+
+  validateForm() {
+    var fields = [
+      _nameKey,
+      _emailKey,
+      _phoneKey,
+      _passwordKey,
+      _confirmPassKey
+    ];
+    bool flag = true;
+    for (int i = 0; i < fields.length; i++) {
+      if (!fields[i].currentState!.validate()) {
+        flag = false;
+        return flag;
+      }
+    }
+    if (!flag) {
+      return;
+    }
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Processing Data ${nameController.text}')),
+    );
+    Get.to(() => HomeScreen(),
+        transition: Transition.cupertino,
+        duration: Duration(milliseconds: 500));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +74,7 @@ class SignUpScreenState extends State<SignUpScreen> {
                     subtitleText: "Let's create your Account",
                   ).h16(context),
                   TextFormField(
+                    key: _nameKey,
                     controller: nameController,
                     decoration: InputDecoration(
                         prefixIcon: Icon(Icons.person),
@@ -74,6 +90,8 @@ class SignUpScreenState extends State<SignUpScreen> {
                     },
                   ).marginSymmetric(vertical: 3),
                   TextFormField(
+                    controller: emailController,
+                    key: _emailKey,
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
                         prefixIcon: Icon(Icons.email_outlined),
@@ -88,6 +106,8 @@ class SignUpScreenState extends State<SignUpScreen> {
                     },
                   ).marginSymmetric(vertical: 3),
                   TextFormField(
+                    controller: phoneController,
+                    key: _phoneKey,
                     keyboardType: TextInputType.phone,
                     inputFormatters: [
                       LengthLimitingTextInputFormatter(10),
@@ -106,6 +126,7 @@ class SignUpScreenState extends State<SignUpScreen> {
                     },
                   ).marginSymmetric(vertical: 3),
                   TextFormField(
+                    key: _passwordKey,
                     controller: passwordController,
                     obscureText: isObscure,
                     decoration: InputDecoration(
@@ -136,6 +157,7 @@ class SignUpScreenState extends State<SignUpScreen> {
                     },
                   ).marginSymmetric(vertical: 3),
                   TextFormField(
+                    key: _confirmPassKey,
                     controller: confirmPasswordController,
                     obscureText: isObscure,
                     decoration: InputDecoration(
@@ -173,27 +195,16 @@ class SignUpScreenState extends State<SignUpScreen> {
                             context,
                             "Terms & Conditions!",
                             "This is our terms and conditions",
-                            VxBox(
-                              child: "any data here".text.make()
-                            ).alignCenter
-                                .size(Get.width * 0.9, Get.height * 0.5)
-                                .color(helperColor(context))
-                                .make()
-                          );
+                            SingleChildScrollView(
+                              child: VxBox(child: terms.text.make()).make(),
+                            ).centered());
                       },
                       child: 'Terms & conditions'.text.bold.make()),
                   ElevatedButton(
                           onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                    content: Text(
-                                        'Processing Data ${nameController.text}')),
-                              );
-                              Get.to(()=> HomeScreen(), transition: Transition.cupertino, duration: Duration(milliseconds: 500) );
-                            }
+                            validateForm();
                           },
-                          child: "Signup".text.make())
+                          child: "Submit".text.make())
                       .marginSymmetric(vertical: 5),
                   VxBox(
                       child: Column(
@@ -279,15 +290,4 @@ class SignUpScreenState extends State<SignUpScreen> {
       ),
     );
   }
-
-  DropdownMenuItem<String> buildMenuItems(String city) => DropdownMenuItem(
-        value: city,
-        child: Text(
-          city,
-          style: const TextStyle(
-            fontWeight: FontWeight.w800,
-            fontSize: 20,
-          ),
-        ),
-      );
 }

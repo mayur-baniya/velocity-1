@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:velocity/screens/login_screen.dart';
+import 'package:velocity/screens/mainpages/bottomnav.dart';
 import 'package:velocity/screens/signup_screen.dart';
-import 'package:velocity/screens/test.dart';
 import 'package:velocity/themes/colors.dart';
 import 'package:velocity/themes/themes.dart';
 
@@ -21,9 +21,9 @@ void setStatusBarColor(BuildContext context) {
       brightness == Brightness.dark ? Colors.black : scaffoldLightColor;
 
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    statusBarColor: statusBarColor,
-    statusBarIconBrightness: brightness== Brightness.dark ? Brightness.light : Brightness.dark
-  ));
+      statusBarColor: statusBarColor,
+      statusBarIconBrightness:
+          brightness == Brightness.dark ? Brightness.light : Brightness.dark));
 }
 
 class MyApp extends StatelessWidget {
@@ -32,14 +32,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     setStatusBarColor(context);
-    print("envtest: ${dotenv.env['appname']}");
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Velocity',
       theme: lightTheme,
       darkTheme: darkTheme,
       // themeMode: ThemeMode.system,
-      home: LoginScreen(), //LoginScreen()SignUpScreen
+      home: BottomTest(), //LoginScreen()SignUpScreen
     );
   }
 }
