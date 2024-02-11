@@ -12,7 +12,7 @@ secondaryColor(BuildContext context) =>
 
 helperColor(BuildContext context) =>(
   (MediaQuery.of(context).platformBrightness == Brightness.light
-      ? Colors.white38 
+      ? Color.fromARGB(255, 237, 241, 248)
       : Color.fromARGB(255, 29, 29, 29)
   )
 );
