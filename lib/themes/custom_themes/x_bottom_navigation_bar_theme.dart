@@ -20,7 +20,7 @@ BottomNavigationBarThemeData lightBottomNavBarThemeData =
 
 BottomNavigationBarThemeData darkBottomNavBarThemeData =
     BottomNavigationBarThemeData(
-  showUnselectedLabels: false,
+   showUnselectedLabels: false,
     showSelectedLabels: true,
 
   backgroundColor: scaffoldDarkColor,

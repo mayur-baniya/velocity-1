@@ -33,14 +33,4 @@ Color bgDarkColor = Colors.black;
 //Icon IconData = (BuildContext context) => ((MediaQuery.of(context).platformBrightness == Brightness.dark ? Icon(CupertinoIcons.moon_stars_fill)   : Icon(CupertinoIcons.sun_dust));
 //Icon IconData = (BuildContext context) => ((MediaQuery.of(context).platformBrightness == Brightness.dark ? Icon(CupertinoIcons.moon_stars_fill)   : Icon(CupertinoIcons.sun_dust));
 
-Color getColorBasedOnTheme() {
-  print("modeeeeeeeee");
-  print(Get.isPlatformDarkMode);
-  if (Get.isDarkMode) {
-    // Dark mode is enabled
-    return Colors.black;
-  } else {
-    // Light mode is enabled
-    return Colors.white;
-  }
-}
+

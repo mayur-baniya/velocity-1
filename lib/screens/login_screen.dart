@@ -1,17 +1,21 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_
 
+import 'dart:convert';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import 'package:velocity/common/utilities/common_wave_indicator.dart';
 import 'package:velocity/common/widgets/app_header_logo.dart';
 import 'package:velocity/common/widgets/bottom_sheet.dart';
 import 'package:velocity/screens/mainpages/home_screen.dart';
 import 'package:velocity/screens/signup_screen.dart';
+import 'package:velocity/services/authentication.dart';
 import 'package:velocity/themes/colors.dart';
-import 'package:velocity/themes/icons.dart';
 import 'package:velocity_x/velocity_x.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:velocity/common/validation.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -24,15 +28,46 @@ class _LoginScreenState extends State<LoginScreen> {
   bool isLoading = false;
   bool isObscure = true;
   final _formKey = GlobalKey<FormState>();
+  final _emailKey = GlobalKey<FormFieldState>();
+  final _passwordKey = GlobalKey<FormFieldState>();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
-  void setLoadin() async {
-    setState(() {
-      isLoading = true;
-    });
-    await Future.delayed(Duration(milliseconds: 2000));
-    setState(() {
-      isLoading = false;
-    });
+  void Login(BuildContext context) async {
+    if (validateForm([_emailKey, _passwordKey])) {
+      setState(() {
+        isLoading = true;
+      });
+      try {
+        var loginResp =
+            await loginService(emailController.text, passwordController.text);
+        print('loginResp: ${loginResp}');
+        var resp = jsonDecode(loginResp.body);
+        if (loginResp.statusCode == 200) {
+          if (resp['Status'] == 'LOGIN_SUCCESS') {
+            Get.to(() => HomeScreen(),
+                transition: Transition.cupertino,
+                duration: Duration(milliseconds: 500));
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: '${resp['Error']}'.text.make()),
+            );
+          }
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: '${resp['Error']}'.text.make()),
+          );
+        }
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: '${e}'.text.make()),
+        );
+      } finally {
+        setState(() {
+          isLoading = false;
+        });
+      }
+    }
   }
 
   @override
@@ -54,6 +89,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   subtitleText: "Welcome back you've been missed",
                 ).h24(context),
                 TextFormField(
+                  key: _emailKey,
+                  controller: emailController,
                   decoration: const InputDecoration(
                     hintText: "Enter Email",
                     prefixIcon: Icon(Icons.email_outlined),
@@ -68,6 +105,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   },
                 ).marginSymmetric(vertical: 10),
                 TextFormField(
+                  controller: passwordController,
+                  key: _passwordKey,
                   obscureText: isObscure,
                   decoration: InputDecoration(
                       hintText: "Enter password",
@@ -95,19 +134,14 @@ class _LoginScreenState extends State<LoginScreen> {
                     }
                   },
                 ).marginSymmetric(vertical: 10),
-                isLoading
-                    ? commonIndicator()
-                    : ElevatedButton(
-                            onPressed: () {
-                              if (_formKey.currentState!.validate()) {
-                                setLoadin();
-                                Get.to(() => HomeScreen(),
-                                    transition: Transition.cupertino,
-                                    duration: Duration(milliseconds: 500));
-                              }
-                            },
-                            child: "Login".text.make())
-                        .marginSymmetric(vertical: 15),
+                ElevatedButton(
+                        onPressed: () {
+                          Login(context);
+                        },
+                        child: (isLoading
+                            ? commonIndicator(context)
+                            : "Login".text.make()))
+                    .marginSymmetric(vertical: 15),
                 TextButton(
                         onPressed: () {
                           commonBottomSheet(
@@ -115,7 +149,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               "Reset Password!",
                               "How would you like to reset?",
 
-                              // temporary data, will replace it later 
+                              // temporary data, will replace it later
                               VxBox(
                                       child: Column(
                                 children: [
@@ -129,7 +163,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                         .text
                                         .color(secondaryColor(context))
                                         .make(),
-                                    trailing: Icon(Icons.arrow_right, color: primaryColor,),
+                                    trailing: Icon(
+                                      Icons.arrow_right,
+                                      color: primaryColor,
+                                    ),
                                   ))
                                       .withDecoration(BoxDecoration(
                                           color: helperColor(context),
@@ -148,7 +185,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                         .text
                                         .color(secondaryColor(context))
                                         .make(),
-                                    trailing: Icon(Icons.arrow_right, color: primaryColor,),
+                                    trailing: Icon(
+                                      Icons.arrow_right,
+                                      color: primaryColor,
+                                    ),
                                   ))
                                       .withDecoration(BoxDecoration(
                                           color: helperColor(context),
@@ -192,7 +232,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                           onPressed: () {
-                            Get.to(()=> HomeScreen());
+                            Get.to(() => HomeScreen());
                           },
                           child: 'Facebook'.text.white.lg.bold.make()),
                       TextButton(
