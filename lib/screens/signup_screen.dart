@@ -1,13 +1,18 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:velocity/common/utilities/common_wave_indicator.dart';
+import 'package:velocity/common/commonmethods/validation.dart';
 import 'package:velocity/common/widgets/app_header_logo.dart';
 import 'package:velocity/common/widgets/bottom_sheet.dart';
 import 'package:velocity/screens/mainpages/home_screen.dart';
 import 'package:velocity/screens/otp_verification.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:velocity/themes/colors.dart';
+import 'package:velocity/services/authentication.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -30,29 +35,49 @@ class SignUpScreenState extends State<SignUpScreen> {
 
   final _formKey = GlobalKey<FormState>();
   bool isObscure = true;
+  bool isLoading = false;
 
-  validateForm() {
-    var fields = [
-      _nameKey,
-      _emailKey,
-      _phoneKey,
-      _passwordKey,
-      _confirmPassKey
-    ];
-    bool flag = true;
-    for (int i = 0; i < fields.length; i++) {
-      if (!fields[i].currentState!.validate()) {
-        flag = false;
-        return flag;
+  void Signup(BuildContext context) async {
+    if (validateForm(
+        [_nameKey, _emailKey, _phoneKey, _passwordKey, _confirmPassKey])) {
+      setState(() {
+        isLoading = true;
+      });
+      try {
+        var signupResp = await signupService(
+            nameController.text,
+            emailController.text,
+            passwordController.text,
+            passwordController.text);
+        print('loginResp: ${signupResp}');
+        var resp = jsonDecode(signupResp.body);
+        if (signupResp.statusCode == 200) {
+          if (resp['Status'] == 'USER_CREATED_SUCCESSFULLY') {
+            Get.to(() => HomeScreen(),
+                transition: Transition.cupertino,
+                duration: Duration(milliseconds: 500));
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: '${resp['Error']}'.text.make()),
+            );
+          }
+        }else{
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: '${resp['Error']}'.text.make()),
+          );
+        }
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: '${e}'.text.make()),
+        );
+      } finally {
+        setState(() {
+          isLoading = false;
+        });
       }
     }
-    if (!flag) {
-      return;
-    }
    
-    Get.to(() => OtpScreen(email:this.emailController.text),
-        transition: Transition.cupertino,
-        duration: Duration(milliseconds: 500));
+   
   }
 
   @override
@@ -70,7 +95,7 @@ class SignUpScreenState extends State<SignUpScreen> {
               child: Column(
                 children: [
                   AppHeaderLogo(
-                    subtitleText: "Let's create your Account",
+                    subtitleText: "Let's create your account",
                   ).h16(context),
                   TextFormField(
                     key: _nameKey,
@@ -201,9 +226,11 @@ class SignUpScreenState extends State<SignUpScreen> {
                       child: 'Terms & conditions'.text.bold.make()),
                   ElevatedButton(
                           onPressed: () {
-                            validateForm();
+                            Signup(context);
                           },
-                          child: "Submit".text.make())
+                          child: isLoading
+                              ? commonIndicator(context)
+                              : "Submit".text.make())
                       .marginSymmetric(vertical: 5),
                   VxBox(
                       child: Column(
