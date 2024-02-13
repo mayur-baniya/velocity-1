@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:velocity/common/widgets/app_header_logo.dart';
 import 'package:velocity/common/widgets/bottom_sheet.dart';
 import 'package:velocity/screens/mainpages/home_screen.dart';
+import 'package:velocity/screens/otp_verification.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:velocity/themes/colors.dart';
 
@@ -48,10 +49,8 @@ class SignUpScreenState extends State<SignUpScreen> {
     if (!flag) {
       return;
     }
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Processing Data ${nameController.text}')),
-    );
-    Get.to(() => HomeScreen(),
+   
+    Get.to(() => OtpScreen(email:this.emailController.text),
         transition: Transition.cupertino,
         duration: Duration(milliseconds: 500));
   }

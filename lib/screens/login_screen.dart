@@ -8,6 +8,7 @@ import 'package:velocity/common/utilities/common_wave_indicator.dart';
 import 'package:velocity/common/widgets/app_header_logo.dart';
 import 'package:velocity/common/widgets/bottom_sheet.dart';
 import 'package:velocity/screens/mainpages/home_screen.dart';
+import 'package:velocity/screens/otp_verification.dart';
 import 'package:velocity/screens/signup_screen.dart';
 import 'package:velocity/themes/colors.dart';
 import 'package:velocity/themes/icons.dart';
@@ -138,7 +139,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                               BorderRadius.circular(11)))
                                       .size(Get.width * 0.9, Get.height * 0.07)
                                       .make()
-                                      .marginOnly(top: 20),
+                                      .marginOnly(top: 20).onTap(() {
+                                        Get.to(() => OtpScreen(email: "",));
+                                      }),
                                   VxBox(
                                           child: ListTile(
                                     leading: Icon(
