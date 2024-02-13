@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rolling_bottom_bar/rolling_bottom_bar.dart';
 import 'package:rolling_bottom_bar/rolling_bottom_bar_item.dart';
-import 'package:velocity/screens/mainpages/NavBar.dart';
+import 'package:velocity/common/components/NavBar.dart';
 import 'package:velocity/screens/mainpages/Search.dart';
 import 'package:velocity/screens/mainpages/favorite.dart';
 import 'package:velocity/screens/mainpages/profile.dart';

@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:velocity/common/utilities/common_wave_indicator.dart';
-import 'package:velocity/common/validation.dart';
+import 'package:velocity/common/commonmethods/validation.dart';
 import 'package:velocity/common/widgets/app_header_logo.dart';
 import 'package:velocity/common/widgets/bottom_sheet.dart';
 import 'package:velocity/screens/mainpages/home_screen.dart';
